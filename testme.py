@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 from time import sleep
 import pygame
+from random import randint
 
 pygame.init()
 pygame.mixer.init()
@@ -54,6 +55,8 @@ GPIO.setup(d4,GPIO.OUT)
 GPIO.setup(d5,GPIO.OUT)
 GPIO.setup(d6,GPIO.OUT)
 
+GPIO.output(d2,0)
+
 #Function to play sounds
 def play_sound(x):
 	pygame.mixer.music.load(x)
@@ -61,6 +64,64 @@ def play_sound(x):
 	while pygame.mixer.get_busy() == True:
 		continue
 
+#Function to roll dice
+def dice():
+	roll = randint(1,6)
+	print(roll)
+	if roll == 1:
+		GPIO.output(d1,1)
+		sleep(3)
+		GPIO.output(d1,0)
+	elif roll == 2:
+		GPIO.output(d1,1)
+		GPIO.output(d2,1)
+		sleep(3)
+		GPIO.output(d1,0)
+		GPIO.output(d2,0)
+	elif roll == 3:
+		GPIO.output(d1,1)
+		GPIO.output(d2,1)
+		GPIO.output(d3,1)
+		sleep(3)
+		GPIO.output(d1,0)
+		GPIO.output(d2,0)
+		GPIO.output(d3,0)	
+	elif roll == 4:	
+		GPIO.output(d1,1)
+		GPIO.output(d2,1)
+		GPIO.output(d3,1)
+		GPIO.output(d4,1)
+		sleep(3)
+		GPIO.output(d1,0)
+		GPIO.output(d2,0)
+		GPIO.output(d3,0)
+		GPIO.output(d4,0)	
+	elif roll == 5:	
+		GPIO.output(d1,1)
+		GPIO.output(d2,1)
+		GPIO.output(d3,1)
+		GPIO.output(d4,1)
+		GPIO.output(d5,1)
+		sleep(3)
+		GPIO.output(d1,0)
+		GPIO.output(d2,0)
+		GPIO.output(d3,0)
+		GPIO.output(d4,0)	
+		GPIO.output(d5,0)
+	elif roll == 6:	
+		GPIO.output(d1,1)
+		GPIO.output(d2,1)
+		GPIO.output(d3,1)
+		GPIO.output(d4,1)
+		GPIO.output(d5,1)
+		GPIO.output(d6,1)
+		sleep(3)
+		GPIO.output(d1,0)
+		GPIO.output(d2,0)
+		GPIO.output(d3,0)
+		GPIO.output(d4,0)	
+		GPIO.output(d5,0)
+		GPIO.output(d6,0)			
 while True:
     if GPIO.input(r13) == True:
         print("button pressed")
@@ -95,5 +156,5 @@ while True:
         sleep(0.5)
         play_sound(snake)
     elif GPIO.input(button) == True:
-    	print("BUTTON")
+    	dice()
     	sleep(1)
