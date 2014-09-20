@@ -3,9 +3,6 @@ from time import sleep
 import pygame
 from random import randint
 
-pygame.init()
-pygame.mixer.init()
-
 #Variables
 #Sounds
 snake = "wrong.mp3"
@@ -34,6 +31,11 @@ d6 = 6
 
 #Button
 button = 13
+
+#Configuration
+
+pygame.init()
+pygame.mixer.init()
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(r13,GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
